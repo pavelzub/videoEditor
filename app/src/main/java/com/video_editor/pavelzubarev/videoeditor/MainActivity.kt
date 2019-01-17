@@ -70,9 +70,11 @@ class MainActivity : AppCompatActivity() {
             path.mkdirs()
             val videoFile = File(path, videoName)
             videoFile.createNewFile()
-            val encoder = AndroidSequenceEncoder.createSequenceEncoder(videoFile, 1)
+            val encoder = AndroidSequenceEncoder.createSequenceEncoder(videoFile, 30)
             images.forEach {
-                encoder.encodeImage(Bitmap.createScaledBitmap(it, 640, 480, true))
+                var b = Bitmap.createScaledBitmap(it, 640, 480, true)
+                for (i in 1..30)
+                    encoder.encodeImage(b)
             }
             encoder.finish()
 
